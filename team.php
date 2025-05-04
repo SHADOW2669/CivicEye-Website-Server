@@ -15,7 +15,7 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <link rel="stylesheet" href="team.css" />
-    
+
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lucide@0.396.0/dist/umd/lucide.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -26,8 +26,8 @@
     <div id="particles-js"></div>
 
     <?php
-session_start();
-?>
+    session_start();
+    ?>
     <nav class="navbar">
         <a href="index.php" class="navbar-logo">
             <img src="IMAGES/logo1.png" alt="Civic Eye Logo">

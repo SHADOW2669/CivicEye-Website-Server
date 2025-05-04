@@ -1,3 +1,4 @@
+/* General Reset and Base Styles */
 * {
     margin: 0;
     padding: 0;
@@ -7,19 +8,15 @@
 html {
     scroll-behavior: smooth;
     scroll-padding-top: 70px;
+    /* Adjusted for navbar height */
     overflow-x: hidden;
     max-width: 100%;
-}
-
-@media screen and (min-width: 768px) {
-    html {
-        scroll-padding-top: 80px;
-    }
 }
 
 body {
     font-family: 'IBM Plex Sans', sans-serif;
     background-color: #050510;
+    /* Slightly different dark bg for download page */
     color: #e0e0e0;
     line-height: 1.7;
     overflow-x: hidden;
@@ -28,21 +25,27 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    /* Subtle gradients for download page */
     background: #050510 linear-gradient(180deg, rgba(131, 0, 254, 0.05) 0%, transparent 30%),
         radial-gradient(ellipse at bottom right, rgba(56, 189, 248, 0.08) 0%, transparent 60%);
     scrollbar-width: none;
+    /* Firefox */
     -ms-overflow-style: none;
-    user-select: none;
+    /* IE and Edge */
+    /* user-select: none; */
+    /* Allowing text selection for download instructions */
 }
 
 body::-webkit-scrollbar {
     display: none;
+    /* Chrome, Safari, Opera */
 }
 
 body.no-scroll {
     overflow: hidden;
 }
 
+/* Particles Background (Optional - Keep if used on download page) */
 #particles-js {
     position: fixed;
     width: 100%;
@@ -50,118 +53,172 @@ body.no-scroll {
     top: 0;
     left: 0;
     z-index: -1;
+    /* background-color: #000; */
+    /* Match body background */
 }
 
+/* --- Navbar Styles (Synced with index.css) --- */
 .navbar {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 70px;
+    /* Default height */
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 1rem;
+    /* Mobile padding */
     background: rgba(0, 0, 0, 0.7);
+    /* Semi-transparent background */
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
+    /* Frosted glass effect */
     z-index: 1000;
+    /* Ensure navbar is on top */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3), 0 0 15px rgba(131, 0, 254, 0.1);
+    /* Subtle shadow */
     border-bottom: 1px solid #222;
+    /* Bottom border */
     transition: height 0.3s ease-in-out;
+    /* Smooth height transition */
 }
 
 .navbar-logo img {
     height: 35px;
+    /* Logo height */
     transition: transform 0.3s ease;
     display: block;
+    /* Prevents extra space below image */
 }
 
 .navbar-logo img:hover {
     transform: scale(1.1);
+    /* Slight zoom on hover */
 }
 
 .navbar-links {
     display: none;
+    /* Hidden on mobile by default */
     align-items: center;
     gap: 1rem;
+    /* Spacing between links */
 }
 
 .navbar-links a {
     color: #e5e7eb;
+    /* Link color */
     text-decoration: none;
     font-weight: 500;
     font-family: 'Roboto Mono', monospace;
+    /* Monospace font for links */
     padding: 0.6rem 0.75rem;
     transition: color 0.3s, text-shadow 0.3s, background-color 0.3s;
     border-radius: 4px;
     line-height: 1;
+    /* Ensure consistent vertical alignment */
 }
 
 .navbar-links a:hover {
     color: #8300fe;
+    /* Purple hover color */
     text-shadow: 0 0 8px rgba(131, 0, 254, 0.7);
+    /* Purple glow */
     background-color: rgba(131, 0, 254, 0.1);
+    /* Subtle purple background */
 }
 
-.navbar-links .login-btn-link {
-    text-decoration: none !important;
-}
-
-
+/* Active link style (Example - adjust selector as needed) */
 .navbar-links a.active {
     color: #ff6600;
+    /* Orange for active link */
     font-weight: bold;
     text-shadow: 0 0 8px rgba(255, 102, 0, 0.7);
 }
 
+/* Special handling for button link container */
+.navbar-links .login-btn-link {
+    text-decoration: none !important;
+    /* Override default link styles */
+    padding: 0;
+    /* Remove padding from the link itself */
+    background-color: transparent !important;
+    /* Ensure no background on link */
+    text-shadow: none !important;
+    /* Ensure no text shadow on link */
+}
+
+.navbar-links .login-btn-link:hover {
+    background-color: transparent !important;
+    /* Ensure no background on link hover */
+}
+
+/* Login Button Style (Synced with index.css) */
 .login-btn {
     display: inline-block;
     color: white;
     background: transparent;
     border: 2px solid #8300fe;
+    /* Purple border */
     padding: 0.5rem 1rem;
+    /* Mobile padding */
     border-radius: 6px;
     cursor: pointer;
     font-size: 13px;
     font-weight: bold;
     font-family: 'Orbitron', sans-serif;
+    /* Techy font */
     transition: background 0.3s ease-in-out, box-shadow 0.3s ease-in-out, color 0.3s ease-in-out, transform 0.3s ease-in-out;
     text-align: center;
     box-shadow: 0 0 5px rgba(131, 0, 254, 0.3);
-    line-height: 1;
+    /* Subtle purple glow */
+    text-decoration: none;
+    /* Ensure it doesn't look like a standard link if it's an <a> tag */
 }
 
 .login-btn:hover {
     background: #8300fe;
+    /* Purple background on hover */
     box-shadow: 0 0 10px #8300fe, 0 0 15px #8300fe;
+    /* Stronger glow */
     color: white;
     transform: scale(1.05);
+    /* Slight zoom */
 }
 
+/* Hamburger Menu Icon (Synced with index.css - using .menu-toggle selector) */
 .menu-toggle {
+    /* Renamed from .hamburger-menu for clarity */
     display: block;
+    /* Show on mobile */
     background: none;
     border: none;
     cursor: pointer;
     z-index: 1050;
+    /* Above navbar content */
     padding: 0.5rem;
     line-height: 0;
+    /* Prevent extra space */
 }
 
 .menu-toggle svg {
     width: 28px;
     height: 28px;
     stroke: #e5e7eb;
+    /* Icon color */
     stroke-width: 2;
     transition: stroke 0.3s ease;
 }
 
 .menu-toggle:hover svg {
     stroke: #8300fe;
+    /* Purple on hover */
 }
 
+/* --- Mobile Navigation (Synced with index.css - using .mobile-nav selector) --- */
 .mobile-nav {
+    /* Renamed from .mobile-nav-menu */
     position: fixed;
     top: 0;
     left: 0;
@@ -169,21 +226,28 @@ body.no-scroll {
     max-width: 300px;
     height: 100vh;
     background: rgba(10, 10, 20, 0.8);
+    /* Dark, blurred background */
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     z-index: 1100;
+    /* Above overlay */
     transform: translateX(-100%);
+    /* Hidden off-screen */
     opacity: 0;
     visibility: hidden;
     transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s ease-in-out, visibility 0s linear 0.4s;
     display: flex;
     flex-direction: column;
     padding: 6rem 2rem 2rem;
+    /* Top padding for close button space */
     border-right: 1px solid rgba(131, 0, 254, 0.2);
+    /* Subtle border */
     box-shadow: 5px 0 25px rgba(131, 0, 254, 0.1);
+    /* Glow effect */
 }
 
 .mobile-nav.open {
+    /* Class to show the menu */
     transform: translateX(0);
     opacity: 1;
     visibility: visible;
@@ -197,35 +261,48 @@ body.no-scroll {
     font-size: 1.1rem;
     padding: 1rem 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    /* Separator */
     transition: color 0.3s ease, padding-left 0.3s ease;
     text-align: left;
 }
 
 .mobile-nav a:hover {
     color: #c084fc;
+    /* Lighter purple on hover */
     padding-left: 0.5rem;
+    /* Indent on hover */
 }
 
+/* Special handling for button link in mobile nav */
 .mobile-nav .login-btn-link {
-    margin-top: 1rem;
+    margin-top: 2rem;
+    /* Space above button */
     text-align: center;
     border-bottom: none;
-    padding: 2rem 0 0 0;
+    /* Remove border for button container */
+    padding: 0;
+    /* Reset padding */
     text-decoration: none !important;
+    /* Override link styles */
 }
 
 .mobile-nav .login-btn-link:hover {
     padding-left: 0;
+    /* Prevent padding shift on hover */
     background: transparent;
+    /* No background change */
 }
 
 .mobile-nav .login-btn {
     width: 100%;
+    /* Full width button */
     padding: 0.8rem 1rem;
     font-size: 1rem;
 }
 
+/* Close Menu Button (Synced with index.css - using .close-menu selector) */
 .close-menu {
+    /* Renamed from .close-menu-btn */
     position: absolute;
     top: 1.5rem;
     right: 1.5rem;
@@ -235,24 +312,29 @@ body.no-scroll {
     padding: 0.25rem;
     line-height: 0;
     color: #fff;
+    /* Use color for SVG stroke */
 }
 
 .close-menu svg {
     width: 30px;
     height: 30px;
     stroke: currentColor;
+    /* Inherit color from button */
     stroke-width: 2;
     transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .close-menu:hover {
     color: #c084fc;
+    /* Lighter purple on hover */
 }
 
 .close-menu:hover svg {
     transform: rotate(90deg);
+    /* Rotate X on hover */
 }
 
+/* Overlay for mobile menu */
 .overlay {
     position: fixed;
     top: 0;
@@ -260,7 +342,9 @@ body.no-scroll {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
+    /* Dark overlay */
     z-index: 1090;
+    /* Below mobile nav, above content */
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.4s ease-in-out, visibility 0s linear 0.4s;
@@ -272,6 +356,9 @@ body.no-scroll {
     transition: opacity 0.4s ease-in-out, visibility 0s linear 0s;
 }
 
+
+/* --- Hero Button Styles (Keep separate if needed, or sync if used identically) --- */
+/* These are general button styles, potentially used beyond the navbar */
 .hero-btn {
     display: inline-flex;
     align-items: center;
@@ -286,10 +373,13 @@ body.no-scroll {
     transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     cursor: pointer;
     width: 100%;
+    /* Default full width mobile */
     position: relative;
     overflow: hidden;
     border: 2px solid transparent;
     line-height: 1.3;
+    box-shadow: 0 0 8px rgba(131, 0, 254, 0.2);
+    /* Added subtle shadow like index */
 }
 
 .hero-btn::before {
@@ -310,8 +400,10 @@ body.no-scroll {
 }
 
 .hero-btn:hover {
-    box-shadow: 0 0 8px #8300fe, 0 0 15px #8300fe, 0 0 25px #a855f7;
-    transform: scale(1.05) translateY(-2px);
+    box-shadow: 0 0 10px #8300fe, 0 0 20px #a855f7;
+    /* Adjusted hover shadow */
+    transform: scale(1.05);
+    /* Adjusted transform */
 }
 
 .hero-btn.primary {
@@ -334,7 +426,8 @@ body.no-scroll {
 .hero-btn.secondary:hover {
     border-color: #8300fe;
     color: #8300fe;
-    background-color: rgba(131, 0, 254, 0.1);
+    /* background-color: rgba(131, 0, 254, 0.1); */
+    /* Optional: subtle bg on hover */
 }
 
 .hero-btn img,
@@ -344,7 +437,8 @@ body.no-scroll {
     height: 1.1em;
     z-index: 2;
     position: relative;
-    stroke-width: 2.5;
+    stroke-width: 2;
+    /* Adjusted stroke width */
 }
 
 .hero-btn span {
@@ -367,10 +461,12 @@ body.no-scroll {
 
 .hero-btn:active {
     transform: scale(0.98) translateY(0);
+    /* Press down effect */
     filter: brightness(0.9);
     transition-duration: 0.1s;
 }
 
+/* --- OS Specific Link Button Styles (Keep as is) --- */
 .btn-os-link {
     display: inline-flex;
     align-items: center;
@@ -427,9 +523,11 @@ body.no-scroll {
     stroke: #ff6600;
 }
 
+/* --- Main Content Styles (Keep as is) --- */
 main {
     flex: 1;
     padding-top: 70px;
+    /* Match navbar height */
     padding-bottom: 6rem;
     position: relative;
     z-index: 10;
@@ -651,12 +749,12 @@ main {
 
 .download-section code {
     font-family: 'Roboto Mono', monospace;
-    background-color: rgba(50, 50, 70, 0.85);
+    background-color: rgba(40, 40, 55, 0.8);
     padding: 0.3em 0.6em;
     border-radius: 6px;
     font-size: 0.9em;
-    color: #a7f3d0;
-    border: 1px solid rgba(168, 85, 247, 0.3);
+    color: #c5d1de;
+    border: 1px solid rgba(100, 100, 120, 0.4);
     user-select: text;
     display: inline-block;
     white-space: pre-wrap;
@@ -670,6 +768,7 @@ main {
     border: 1px solid rgba(131, 0, 254, 0.3);
     padding: 1.5rem;
     padding-right: 4rem;
+    /* Space for copy button */
     border-radius: 12px;
     overflow-x: auto;
     margin: 2rem 0;
@@ -751,6 +850,7 @@ hr.section-separator {
     max-width: 360px;
 }
 
+/* --- Footer Styles (Keep as is or sync if needed) --- */
 footer {
     font-family: 'Roboto Mono', monospace;
     background-color: #050507;
@@ -769,7 +869,9 @@ footer::before {
     position: absolute;
     inset: 0;
     z-index: -1;
-    background: linear-gradient(rgba(20, 20, 30, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(20, 20, 30, 0.1) 1px, transparent 1px);
+    background:
+        linear-gradient(rgba(20, 20, 30, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(20, 20, 30, 0.1) 1px, transparent 1px);
     background-size: 25px 25px;
     opacity: 0.4;
 }
@@ -819,7 +921,7 @@ footer::before {
 }
 
 .footer-social a:hover img {
-    filter: invert(69%) sepia(98%) saturate(5837%) hue-rotate(248deg) brightness(102%) contrast(101%);
+    filter: invert(13%) sepia(99%) saturate(6000%) hue-rotate(270deg) brightness(95%) contrast(140%);
     transform: scale(1.2);
 }
 
@@ -891,49 +993,63 @@ footer::before {
     color: #bb86fc;
 }
 
+/* --- Responsive Adjustments (Synced Navbar/Button related parts) --- */
 @media screen and (min-width: 768px) {
     html {
         scroll-padding-top: 80px;
+        /* Adjust for taller navbar */
     }
 
     main {
         padding-top: 80px;
+        /* Match taller navbar */
     }
 
     .navbar {
         height: 80px;
+        /* Taller navbar */
         padding: 0 2.5rem;
+        /* Wider padding */
     }
 
     .navbar-logo img {
         height: 45px;
+        /* Larger logo */
     }
 
     .navbar-links {
         display: flex;
+        /* Show links */
     }
 
     .menu-toggle {
         display: none;
+        /* Hide hamburger */
     }
 
     .navbar-links a {
         padding: 0.6rem 1rem;
+        /* Desktop link padding */
     }
 
     .navbar-links .login-btn-link {
         margin-left: 1rem;
+        /* Space before login button */
     }
 
+    /* Login button desktop size */
     .login-btn {
         display: inline-block;
         width: auto;
         padding: 0.6rem 1.2rem;
+        /* Desktop padding */
         font-size: 14px;
     }
 
+    /* Hero button desktop size */
     .hero-btn {
         width: auto;
+        /* Allow button to size based on content */
     }
 
     .os-download-wrapper,
@@ -986,14 +1102,18 @@ footer::before {
 @media screen and (min-width: 1024px) {
     .navbar {
         padding: 0 4rem;
+        /* Even wider padding */
     }
 
     .navbar-links {
         gap: 1.5rem;
+        /* More space between links */
     }
 
+    /* Login button larger screen size */
     .login-btn {
         padding: 0.6rem 1.2rem;
+        /* Consistent with 768px */
         font-size: 14px;
     }
 
@@ -1019,9 +1139,11 @@ footer::before {
     }
 }
 
+/* --- Utility --- */
 .scroll-anchor {
     display: block;
     position: relative;
     top: -120px;
+    /* Offset for fixed navbar + extra space */
     visibility: hidden;
 }

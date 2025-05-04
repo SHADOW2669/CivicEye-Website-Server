@@ -1,453 +1,1058 @@
-    /* =============================
-        Base Reset & Body Styling (Purple Accent Theme)
-       ============================= */
-       * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
+        /* Add styles for loading indicators */
+        #loadingIndicator,
+        #loadError {
+            display: none;
+            /* Hidden by default */
+            text-align: center;
+            color: #aaa;
+            margin-top: 1rem;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.9em;
+        }
 
-    html {
-        scroll-behavior: smooth;
-        scroll-padding-top: 70px; /* Adjust for fixed navbar */
-        overflow-x: hidden;
-        max-width: 100%;
-    }
+        #loadError {
+            color: #ef5350;
+            /* Red for error */
+        }
 
-    body {
-        font-family: 'IBM Plex Sans', sans-serif;
-        background-color: #0a0a0a; /* Dark background */
-        color: #e0e0e0;
-        line-height: 1.7;
-        overflow-x: hidden;
-        max-width: 100%;
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
-        scrollbar-width: none; /* Firefox */
-        -ms-overflow-style: none; /* IE and Edge */
-        user-select: auto;
-        padding-top: 70px; /* Account for fixed navbar */
-    }
-    body::-webkit-scrollbar { display: none; } /* Chrome, Safari, Opera */
+        /* Ensure button container has appropriate spacing */
+        #loadMoreContainer {
+            text-align: center;
+            margin-top: 2.5rem;
+            /* Space above the button */
+            margin-bottom: 2rem;
+            /* Space below the button */
+        }
 
-    /* Background Gradient & Pulse */
-    body::before {
-        content: '';
-        position: fixed;
-        top: 0; left: 0; right: 0; bottom: 0;
-        z-index: -2; /* Behind particles and content */
-        background: radial-gradient(ellipse at 50% 50%, rgba(131, 0, 254, 0.12) 0%, transparent 70%),
-                    radial-gradient(ellipse at top left, rgba(56, 189, 248, 0.1) 0%, transparent 65%),
-                    radial-gradient(ellipse at bottom right, rgba(131, 0, 254, 0.1) 0%, transparent 65%);
-        animation: backgroundPulse 15s infinite ease-in-out alternate;
-        pointer-events: none; /* Allow clicks through */
-    }
-
-    @keyframes backgroundPulse {
-        0% { opacity: 0.7; transform: scale(1); }
-        100% { opacity: 1; transform: scale(1.03); }
-    }
-
-    /* Class to prevent scrolling when modal or nav is open */
-    body.modal-open {
-        overflow: hidden;
-    }
-
-    /* =============================
-        Particles Background (Purple/Blue Theme)
-       ============================= */
-    #particles-js {
-        position: fixed;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        z-index: -1; /* Behind content */
-        background-color: transparent;
-        pointer-events: none;
-    }
-
-    /* =============================
-       Navbar Styling (Purple Accent Theme)
-       ============================= */
-    .navbar {
-        position: fixed; top: 0; left: 0; width: 100%; height: 70px; display: flex;
-        justify-content: space-between; align-items: center; padding: 0 1rem;
-        background: rgba(10, 10, 15, 0.75); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
-        z-index: 1000;
-        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.5), 0 0 25px rgba(131, 0, 254, 0.2);
-        border-bottom: 1px solid rgba(131, 0, 254, 0.25);
-        transition: height 0.3s ease-in-out;
-    }
-    .navbar-logo img { height: 35px; transition: transform 0.3s ease; display: block; }
-    .navbar-logo img:hover { transform: scale(1.1); }
-
-    /* Desktop Navigation Links (ALWAYS HIDDEN in provided CSS) */
-    .navbar-links { display: none; }
-
-    /* Hamburger Menu Button (Always Visible) */
-    .hamburger-menu {
-        display: block; background: none; border: none; cursor: pointer;
-        z-index: 1050; padding: 0.5rem; line-height: 0;
-    }
-    /* Hamburger Icon Styling (White Fill) */
-    .hamburger-menu svg {
-        width: 28px; height: 28px; fill: #ffffff; transition: fill 0.3s ease;
-    }
-    /* Purple hover for hamburger */
-    .hamburger-menu:hover svg { fill: #a855f7; }
-
-    /* Mobile Navigation Menu (Purple Accent Theme) */
-    .mobile-nav-menu {
-        position: fixed; top: 0; left: 0; width: 80%; max-width: 300px; height: 100vh;
-        background: rgba(10, 10, 20, 0.8); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-        z-index: 1100;
-        transform: translateX(-100%); opacity: 0; visibility: hidden;
-        transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s ease-in-out, visibility 0s linear 0.4s;
-        display: flex; flex-direction: column; padding: 6rem 2rem 2rem;
-        border-right: 1px solid rgba(131, 0, 254, 0.2);
-        box-shadow: 5px 0 25px rgba(131, 0, 254, 0.1);
-        overflow-y: auto; /* Allow scrolling if content exceeds height */
-    }
-    /* Active state for mobile menu */
-    .mobile-nav-menu.active {
-        transform: translateX(0); opacity: 1; visibility: visible;
-        transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s ease-in-out, visibility 0s linear 0s;
-    }
-    /* Style regular links in mobile menu (No Icons, No Borders) */
-    .mobile-nav-menu a:not(.logout-btn-link) {
-        color: #e5e7eb; text-decoration: none; font-family: 'Roboto Mono', monospace; font-size: 1.1rem;
-        padding: 1rem 0; border-bottom: none;
-        transition: color 0.3s ease, padding-left 0.3s ease; text-align: left;
-        display: block;
-    }
-    .mobile-nav-menu a:not(.logout-btn-link):hover { color: #c084fc; padding-left: 0.5rem; } /* Purple hover */
-
-    /* Style button link wrapper in mobile menu */
-    .mobile-nav-menu .logout-btn-link {
-         margin-top: auto; text-align: center; border-bottom: none; padding: 1rem 0 0 0; display: block;
-         border-top: none; text-decoration: none; /* Ensure link itself isn't underlined */
-    }
-     .mobile-nav-menu .logout-btn-link:hover { padding-left: 0; background-color: transparent; text-shadow: none; }
-     /* Style button itself in mobile menu */
-     .mobile-nav-menu .logout-btn { width: 100%; padding: 0.8rem 1rem; font-size: 1rem; }
-
-    /* Close Button for Mobile Menu */
-    .close-menu-btn {
-        position: absolute; top: 1.5rem; right: 1.5rem; background: none; border: none;
-        cursor: pointer; padding: 0.25rem; line-height: 0;
-    }
-    .close-menu-btn i.lucide { width: 30px; height: 30px; color: #9ca3af; stroke-width: 2; transition: color 0.3s ease, transform 0.3s ease; }
-    .close-menu-btn:hover i.lucide { color: #fff; transform: rotate(90deg); }
+        /* Style the button itself (inherits from .btn-base) */
+        #loadMoreBtn {
+            min-width: 150px;
+            /* Give it some minimum width */
+            /* Use different style if needed, e.g., less prominent */
+            background: transparent;
+            color: #c084fc;
+            border: 2px solid #8300fe;
+            box-shadow: 0 0 8px rgba(131, 0, 254, 0.3);
+        }
+         #loadMoreBtn:hover {
+           background: #8300fe;
+           color: #ffffff;
+           border-color: #8300fe;
+           box-shadow: 0 0 15px rgba(131, 0, 254, 0.6);
+           transform: scale(1.03);
+        }
+        #loadMoreBtn::before { /* Disable shine */
+            display: none;
+        }
 
 
-    /* ================================
-       Button Styling (Purple Accent Theme)
-    ================================== */
-    .btn-base {
-        display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem; padding: 0.7rem 1.4rem;
-        border-radius: 8px; cursor: pointer; font-size: clamp(0.85rem, 1.5vw + 0.5rem, 0.95rem); font-weight: bold;
-        font-family: 'Orbitron', sans-serif;
-        transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        text-align: center; text-decoration: none; position: relative; overflow: hidden; border: 2px solid transparent;
-        pointer-events: auto; user-select: none;
-    }
-     .btn-base span,
-     .btn-base i.lucide {
-        position: relative; z-index: 2; height: 1.1em; width: auto; stroke-width: 2.5; pointer-events: none;
-    }
-    .btn-base i.lucide { width: 1.1em; }
+        /* Ensure card images have a background color while loading or if broken */
+        .violation-card img.violation-image {
+            background-color: #2a2a3a;
+            /* Placeholder background */
+        }
 
-     /* Shiny hover effect */
-     .btn-base::before {
-         content: ''; position: absolute; top: 0; left: -120%; width: 60%; height: 100%;
-         background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
-         transform: skewX(-25deg); transition: left 0.7s ease; z-index: 1; pointer-events: none;
-     }
-     .btn-base:hover::before { left: 120%; }
-     /* Active (pressed) state */
-     .btn-base:active { transform: scale(0.97); transition-duration: 0.1s; filter: brightness(0.9); }
+        /* Class to hide cards via JS filtering */
+        .violation-card.hidden {
+            display: none;
+        }
 
-    /* Nav Action Button Style (Purple Outline - Used for Logout) */
-    .btn-nav-action {
-        background: transparent; color: #c084fc; border: 2px solid #8300fe;
-        box-shadow: 0 0 8px rgba(131, 0, 254, 0.3); animation: none;
-    }
-    .btn-nav-action:hover {
-        background: #8300fe; color: #ffffff; border-color: #8300fe;
-        box-shadow: 0 0 15px rgba(131, 0, 254, 0.6); transform: scale(1.03);
-    }
-     .btn-nav-action:active {
-         background: #6a00d3; border-color: #6a00d3;
-         transform: scale(0.98); filter: brightness(0.9);
-     }
-     .btn-nav-action::before { display: none; }
-
-    /* Approve/Reject Button Styles */
-    .btn-approve, .btn-reject {
-        padding: 0.4rem 0.8rem; font-size: 0.8rem; font-family: 'IBM Plex Sans', sans-serif;
-        font-weight: bold; gap: 0.4rem; width: calc(50% - 0.5rem); margin-top: 0.5rem;
-    }
-     .btn-approve i.lucide, .btn-reject i.lucide { width: 1em; height: 1em; stroke-width: 3; }
-
-    .btn-approve { background-color: #10b981; color: white; border-color: #059669; }
-    .btn-approve:hover { background-color: #059669; border-color: #047857; transform: scale(1.05); }
-    .btn-approve:disabled { background-color: #555; border-color: #444; color: #aaa; cursor: not-allowed; opacity: 0.7; }
-
-    .btn-reject { background-color: #ef4444; color: white; border-color: #dc2626; }
-    .btn-reject:hover { background-color: #dc2626; border-color: #b91c1c; transform: scale(1.05); }
-     .btn-reject:disabled { background-color: #555; border-color: #444; color: #aaa; cursor: not-allowed; opacity: 0.7; }
-
-    .violation-actions button:disabled { pointer-events: none; }
-
-    /* ================================
-       Main Content Styling
-    ================================== */
-    main {
-        flex: 1; padding-bottom: 6rem; position: relative; z-index: 10;
-        width: 100%; max-width: 100%; overflow-x: hidden; user-select: auto;
-    }
-
-    /* ================================
-       Admin Page Specific Styling
-    ================================== */
-    .admin-container {
-        max-width: 1600px; margin: 0 auto; padding: 2rem 1.5rem;
-    }
-
-    .admin-header {
-        text-align: center; margin-bottom: 2rem;
-    }
-
-    .admin-header h1 {
-        font-family: 'Orbitron', sans-serif; font-size: clamp(2em, 4vw + 1em, 2.8em);
-        color: #fff; margin-bottom: 0.5rem; text-shadow: 0 0 12px rgba(168, 85, 247, 0.7);
-    }
-    .admin-header p {
-        color: #bbb; font-size: clamp(0.85em, 1.3vw + 0.5em, 0.95em);
-        font-family: 'Roboto Mono', monospace; font-style: normal; opacity: 0.8;
-    }
-
-    /* Filter Section */
-    .filter-section {
-        margin-bottom: 2.5rem; padding: 1.5rem; background: rgba(20, 20, 30, 0.4);
-        border: 1px solid rgba(131, 0, 254, 0.15); border-radius: 10px; text-align: center;
-    }
-    .filter-section h3 {
-        margin-bottom: 1rem; font-family: 'Orbitron', sans-serif; color: #e0e0e0; font-size: 1.1em;
-    }
-    .filter-buttons button {
-        background: rgba(255, 255, 255, 0.08); color: #ccc; border: 1px solid #555;
-        padding: 0.5rem 1rem; margin: 0.3rem 0.5rem; /* Added vertical margin for wrap */
-        border-radius: 6px; cursor: pointer;
-        font-family: 'Roboto Mono', monospace; transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-    }
-    .filter-buttons button:hover { background: rgba(131, 0, 254, 0.2); color: #fff; border-color: #a855f7; }
-    .filter-buttons button.active { background: #8300fe; color: white; border-color: #a855f7; box-shadow: 0 0 10px rgba(131, 0, 254, 0.5); }
+        /* Style for session error message */
+         .session-error-message {
+            background-color: rgba(239, 83, 80, 0.2); /* Light red background */
+            color: #ef5350; /* Red text */
+            border: 1px solid rgba(239, 83, 80, 0.4);
+            padding: 1rem;
+            margin: 0 auto 1.5rem auto; /* Center and add margin below */
+            border-radius: 8px;
+            max-width: 800px; /* Limit width */
+            text-align: center;
+            font-family: 'Roboto Mono', monospace;
+         }
 
 
-    /* Stats Section Styling */
-    .stats-section {
-        background: rgba(20, 20, 30, 0.5); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-        border: 1px solid rgba(131, 0, 254, 0.2); border-radius: 12px; padding: 1.5rem 2rem;
-         margin-bottom: 2.5rem; box-shadow: 0 5px 20px rgba(0,0,0, 0.25);
-    }
-    .stats-numbers { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem 2rem; }
-    .stat-item { text-align: center; min-width: 120px; flex: 1; }
-    .stat-value {
-        display: block; font-family: 'Orbitron', sans-serif; font-size: clamp(1.8em, 4vw, 2.5em);
-         font-weight: bold; color: #e0e0e0; line-height: 1.1; margin-bottom: 0.2rem;
-    }
-    .stat-item.pending .stat-value { color: #ffb74d; }
-    .stat-item.rejected .stat-value { color: #ef5350; }
-    .stat-item.approved .stat-value { color: #4db6ac; }
-    .stat-item.total .stat-value { color: #a855f7; }
-    .stat-label {
-        display: block; font-family: 'Roboto Mono', monospace; font-size: clamp(0.75em, 1vw + 0.4em, 0.85em);
-         color: #aaa; margin-top: 0.25rem; text-transform: uppercase;
-    }
+        /* --- Paste ALL your existing CSS from admin.css here --- */
+        /* =============================
+            Base Reset & Body Styling
+           ============================= */
+        * {
+           margin: 0;
+           padding: 0;
+           box-sizing: border-box;
+        }
 
-    /* Violations Grid */
-    .violations-grid {
-        display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem;
-        margin-bottom: 3rem; /* Keep margin */
-    }
+        html {
+           scroll-behavior: smooth;
+           scroll-padding-top: 70px;
+           overflow-x: hidden;
+           max-width: 100%;
+        }
 
-    /* Violation Card Styling */
-    .violation-card {
-        background: rgba(25, 25, 35, 0.6); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
-        border: 1px solid #444; border-radius: 12px; overflow: hidden;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-        transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-        display: flex; flex-direction: column; position: relative;
-    }
-    .violation-card:hover {
-        transform: translateY(-6px) scale(1.01); box-shadow: 0 8px 25px rgba(131, 0, 254, 0.25);
-        border-color: rgba(131, 0, 254, 0.5);
-    }
-    .violation-card img {
-        width: 100%; height: 220px; object-fit: cover; display: block;
-        background-color: #222; border-bottom: 1px solid #444;
-        cursor: zoom-in; /* Add cursor to indicate clickable */
-    }
-    .violation-details { padding: 1.25rem; flex-grow: 1; }
-    .violation-details h4 {
-        font-family: 'Orbitron', sans-serif; font-size: 1.3em; color: #ff8c4d; margin-bottom: 0.75rem;
-    }
-    .violation-details p {
-        font-family: 'Roboto Mono', monospace; font-size: 0.9em; color: #bbb; margin-bottom: 0.3rem; line-height: 1.5;
-    }
-     .violation-details p strong { color: #fff; font-weight: 700; }
+        body {
+           font-family: 'IBM Plex Sans', sans-serif;
+           background-color: #0a0a0a;
+           color: #e0e0e0;
+           line-height: 1.7;
+           overflow-x: hidden;
+           max-width: 100%;
+           position: relative;
+           display: flex;
+           flex-direction: column;
+           min-height: 100vh;
+           scrollbar-width: none;
+           -ms-overflow-style: none;
+           user-select: auto;
+           padding-top: 70px;
+        }
 
-     /* Status display within the card */
-     .violation-status {
-         font-weight: bold; padding: 0.1em 0.5em; border-radius: 4px;
-         font-size: 0.85em; display: inline-block;
-     }
-     .status-pending { color: #ffb74d; background-color: rgba(255, 183, 77, 0.1); border: 1px solid rgba(255, 183, 77, 0.3); }
-     .status-approved { color: #4db6ac; background-color: rgba(77, 182, 172, 0.1); border: 1px solid rgba(77, 182, 172, 0.3); }
-     .status-rejected { color: #ef5350; background-color: rgba(239, 83, 80, 0.1); border: 1px solid rgba(239, 83, 80, 0.3); }
+        body::-webkit-scrollbar {
+           display: none;
+        }
 
-     /* Action buttons container */
-     .violation-actions {
-         padding: 0 1.25rem 1.25rem; display: flex; justify-content: space-between;
-         gap: 1rem; border-top: 1px solid #444; margin-top: 1rem;
-     }
+        body::before {
+           content: '';
+           position: fixed;
+           top: 0;
+           left: 0;
+           right: 0;
+           bottom: 0;
+           z-index: -2;
+           background: radial-gradient(ellipse at 50% 50%, rgba(131, 0, 254, 0.12) 0%, transparent 70%), radial-gradient(ellipse at top left, rgba(56, 189, 248, 0.1) 0%, transparent 65%), radial-gradient(ellipse at bottom right, rgba(131, 0, 254, 0.1) 0%, transparent 65%);
+           animation: backgroundPulse 15s infinite ease-in-out alternate;
+           pointer-events: none;
+        }
 
-    /* Hidden class for filtering */
-    .violation-card.hidden { display: none; }
+        @keyframes backgroundPulse {
+           0% {
+              opacity: 0.7;
+              transform: scale(1);
+           }
 
-    /* Contact Messages Section CSS REMOVED */
+           100% {
+              opacity: 1;
+              transform: scale(1.03);
+           }
+        }
 
-    /* ================================
-       Image Modal Styling
-    ================================== */
-    .modal {
-        display: none; /* Hidden by default */
-        position: fixed; /* Stay in place */
-        z-index: 2000; /* Sit on top */
-        padding-top: 50px; /* Location of the box */
-        left: 0;
-        top: 0;
-        width: 100%; /* Full width */
-        height: 100%; /* Full height */
-        overflow: auto; /* Enable scroll if needed */
-        background-color: rgba(0, 0, 0, 0.85); /* Black w/ opacity */
-        backdrop-filter: blur(5px); /* Optional: blur background */
-        -webkit-backdrop-filter: blur(5px);
-    }
+        body.modal-open {
+           overflow: hidden;
+        }
 
-    .modal-content {
-        margin: auto;
-        display: block;
-        width: auto; /* Respect image aspect ratio */
-        max-width: 90%;
-        max-height: 85vh; /* Limit height */
-        animation-name: zoomIn;
-        animation-duration: 0.4s;
-    }
+        /* =============================
+               Particles Background
+              ============================= */
+        #particles-js {
+           position: fixed;
+           width: 100%;
+           height: 100%;
+           top: 0;
+           left: 0;
+           z-index: -1;
+           background-color: transparent;
+           pointer-events: none;
+        }
 
-    /* Animation */
-    @keyframes zoomIn {
-        from {transform: scale(0.8); opacity: 0;}
-        to {transform: scale(1); opacity: 1;}
-    }
+        /* =============================
+              Navbar Styling
+              ============================= */
+        .navbar {
+           position: fixed;
+           top: 0;
+           left: 0;
+           width: 100%;
+           height: 70px;
+           display: flex;
+           justify-content: space-between;
+           align-items: center;
+           padding: 0 1rem;
+           background: rgba(10, 10, 15, 0.75);
+           backdrop-filter: blur(18px);
+           -webkit-backdrop-filter: blur(18px);
+           z-index: 1000;
+           box-shadow: 0 3px 12px rgba(0, 0, 0, 0.5), 0 0 25px rgba(131, 0, 254, 0.2);
+           border-bottom: 1px solid rgba(131, 0, 254, 0.25);
+           transition: height 0.3s ease-in-out;
+        }
 
-    /* Close Button */
-    .close-modal {
-        position: absolute;
-        top: 15px;
-        right: 35px;
-        color: #f1f1f1;
-        font-size: 40px;
-        font-weight: bold;
-        transition: 0.3s;
-        cursor: pointer;
-        line-height: 1;
-    }
+        .navbar-logo img {
+           height: 35px;
+           transition: transform 0.3s ease;
+           display: block;
+        }
 
-    .close-modal:hover,
-    .close-modal:focus {
-        color: #bbb;
-        text-decoration: none;
-        cursor: pointer;
-    }
+        .navbar-logo img:hover {
+           transform: scale(1.1);
+        }
+
+        .navbar-links {
+           display: none;
+        }
+
+        .hamburger-menu {
+           display: block;
+           background: none;
+           border: none;
+           cursor: pointer;
+           z-index: 1050;
+           padding: 0.5rem;
+           line-height: 0;
+        }
+
+        .hamburger-menu svg {
+           width: 28px;
+           height: 28px;
+           fill: #ffffff;
+           transition: fill 0.3s ease;
+        }
+
+        .hamburger-menu:hover svg {
+           fill: #a855f7;
+        }
+
+        .mobile-nav-menu {
+           position: fixed;
+           top: 0;
+           left: 0;
+           width: 80%;
+           max-width: 300px;
+           height: 100vh;
+           background: rgba(10, 10, 20, 0.8);
+           backdrop-filter: blur(16px);
+           -webkit-backdrop-filter: blur(16px);
+           z-index: 1100;
+           transform: translateX(-100%);
+           opacity: 0;
+           visibility: hidden;
+           transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s ease-in-out, visibility 0s linear 0.4s;
+           display: flex;
+           flex-direction: column;
+           padding: 6rem 2rem 2rem;
+           border-right: 1px solid rgba(131, 0, 254, 0.2);
+           box-shadow: 5px 0 25px rgba(131, 0, 254, 0.1);
+           overflow-y: auto;
+        }
+
+        .mobile-nav-menu.active {
+           transform: translateX(0);
+           opacity: 1;
+           visibility: visible;
+           transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s ease-in-out, visibility 0s linear 0s;
+        }
+
+        .mobile-nav-menu a:not(.logout-btn-link) {
+           color: #e5e7eb;
+           text-decoration: none;
+           font-family: 'Roboto Mono', monospace;
+           font-size: 1.1rem;
+           padding: 1rem 0;
+           border-bottom: none;
+           transition: color 0.3s ease, padding-left 0.3s ease;
+           text-align: left;
+           display: block;
+        }
+
+        .mobile-nav-menu a:not(.logout-btn-link):hover {
+           color: #c084fc;
+           padding-left: 0.5rem;
+        }
+
+        .mobile-nav-menu .logout-btn-link {
+           margin-top: auto; /* Pushes logout to bottom */
+           padding-top: 1rem;
+           text-align: center;
+           border-top: 1px solid rgba(131, 0, 254, 0.15); /* Optional separator */
+           text-decoration: none;
+        }
+
+        .mobile-nav-menu .logout-btn-link:hover {
+           padding-left: 0;
+           background-color: transparent;
+           text-shadow: none;
+        }
+
+        .mobile-nav-menu .logout-btn {
+           width: 100%;
+           padding: 0.8rem 1rem;
+           font-size: 1rem;
+           /* Button styles */
+           display: inline-flex;
+           align-items: center;
+           justify-content: center;
+           gap: 0.6rem;
+           border-radius: 8px;
+           cursor: pointer;
+           font-weight: bold;
+           font-family: 'Orbitron', sans-serif;
+           transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+           text-align: center;
+           text-decoration: none;
+           position: relative;
+           overflow: hidden;
+           border: 2px solid transparent;
+           pointer-events: auto;
+           user-select: none;
+           background: transparent;
+           color: #c084fc;
+           border: 2px solid #8300fe;
+           box-shadow: 0 0 8px rgba(131, 0, 254, 0.3);
+        }
+
+        .mobile-nav-menu .logout-btn:hover {
+           background: #8300fe;
+           color: #ffffff;
+           border-color: #8300fe;
+           box-shadow: 0 0 15px rgba(131, 0, 254, 0.6);
+           transform: scale(1.03);
+        }
+
+        .close-menu-btn {
+           position: absolute;
+           top: 1.5rem;
+           right: 1.5rem;
+           background: none;
+           border: none;
+           cursor: pointer;
+           padding: 0.25rem;
+           line-height: 0;
+        }
+
+        .close-menu-btn i.lucide {
+           width: 30px;
+           height: 30px;
+           color: #9ca3af;
+           stroke-width: 2;
+           transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .close-menu-btn:hover i.lucide {
+           color: #fff;
+           transform: rotate(90deg);
+        }
+
+        /* ================================
+              Button Styling (Base & Actions)
+           ================================== */
+        .btn-base {
+           display: inline-flex;
+           align-items: center;
+           justify-content: center;
+           gap: 0.6rem;
+           padding: 0.7rem 1.4rem;
+           border-radius: 8px;
+           cursor: pointer;
+           font-size: clamp(0.85rem, 1.5vw + 0.5rem, 0.95rem);
+           font-weight: bold;
+           font-family: 'Orbitron', sans-serif;
+           transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+           text-align: center;
+           text-decoration: none;
+           position: relative;
+           overflow: hidden;
+           border: 2px solid transparent;
+           pointer-events: auto;
+           user-select: none;
+        }
+
+        .btn-base span,
+        .btn-base i.lucide {
+           position: relative;
+           z-index: 2;
+           height: 1.1em;
+           width: auto;
+           stroke-width: 2.5;
+           pointer-events: none;
+        }
+
+        .btn-base i.lucide {
+           width: 1.1em;
+        }
+
+        .btn-base::before {
+           content: '';
+           position: absolute;
+           top: 0;
+           left: -120%;
+           width: 60%;
+           height: 100%;
+           background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+           transform: skewX(-25deg);
+           transition: left 0.7s ease;
+           z-index: 1;
+           pointer-events: none;
+        }
+
+        .btn-base:hover::before {
+           left: 120%;
+        }
+
+        .btn-base:active {
+           transform: scale(0.97);
+           transition-duration: 0.1s;
+           filter: brightness(0.9);
+        }
+
+        .btn-approve,
+        .btn-reject {
+           padding: 0.4rem 0.8rem;
+           font-size: 0.8rem;
+           font-family: 'IBM Plex Sans', sans-serif;
+           font-weight: bold;
+           gap: 0.4rem;
+           width: calc(50% - 0.5rem); /* Adjust width based on gap */
+           margin-top: 0.5rem;
+           text-decoration: none; /* Remove underline from links styled as buttons */
+           border-radius: 6px; /* Slightly smaller radius */
+           border-width: 1px; /* Thinner border */
+           box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Subtle shadow */
+           justify-content: center; /* Center content */
+        }
+        .btn-approve::before, .btn-reject::before { display: none; } /* No shine */
 
 
-    /* ================================
-       Footer Styling
-    ================================== */
-    footer {
-        font-family: 'Roboto Mono', monospace; background-color: #030305; color: #9ca3af; padding: 3rem 1rem 1.5rem 1rem;
-        position: relative; z-index: 10; font-size: 0.9rem; border-top: 1px solid #333;
-        box-shadow: 0 -4px 20px -5px rgba(131, 0, 254, 0.2); overflow: hidden;
-        margin-top: auto; /* Push footer to bottom */
-    }
-    footer::before {
-        content: ''; position: absolute; inset: 0; z-index: -1;
-        background: linear-gradient(rgba(10, 10, 20, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(10, 10, 20, 0.1) 1px, transparent 1px);
-        background-size: 20px 20px; opacity: 0.3; pointer-events: none;
-    }
-    .footer-container { max-width: 1200px; margin: 0 auto; }
-    .footer-top { display: flex; flex-direction: column; align-items: center; gap: 1.5rem; margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid #333; text-align: center; }
-    .footer-logo img { height: 35px; }
-    .footer-description { max-width: 450px; color: #9ca3af; font-size: 0.85rem; line-height: 1.7; }
-    .footer-social { display: flex; gap: 1.2rem; }
-    .footer-social a { cursor: pointer; line-height: 0; }
-    /* Using inline SVGs for social icons as external SVGs might not load reliably in all preview environments */
-    .footer-social a svg {
-        width: 20px; height: 20px; fill: #9ca3af; /* Use fill for single-color icons */
-        transition: fill 0.3s ease, transform 0.3s ease, filter 0.3s ease; /* Added filter transition */
-    }
-    .footer-social a:hover svg {
-        fill: #bb86fc; /* Purple hover color */
-        transform: scale(1.15);
-        filter: drop-shadow(0 0 5px rgba(168, 85, 247, 0.5)); /* Use filter for shadow */
-    }
-    .footer-links-section { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem 1.5rem; margin-bottom: 2.5rem; text-align: left; }
-    .footer-links-column { padding: 0 0.5rem; }
-    .footer-links-column h3 { font-size: 1rem; font-weight: 600; color: #e5e7eb; margin-bottom: 0.8rem; font-family: 'Orbitron', sans-serif; }
-    .footer-links-column nav a, .footer-links-column p { display: block; color: #9ca3af; text-decoration: none; margin-bottom: 0.5rem; font-size: 0.85rem; transition: color 0.3s ease, text-decoration 0.3s ease; }
-    .footer-links-column nav a:hover { color: #bb86fc; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
-    .footer-bottom { display: flex; flex-direction: column; justify-content: center; align-items: center; padding-top: 1.5rem; border-top: 1px solid #333; font-size: 0.8rem; color: #888; text-align: center; }
-    .footer-bottom-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem 1.5rem; margin-top: 0.8rem; }
-    .footer-bottom-links a { color: #888; text-decoration: none; transition: color 0.3s ease; }
-    .footer-bottom-links a:hover { color: #bb86fc; }
+        .btn-approve i.lucide,
+        .btn-reject i.lucide {
+           width: 1em;
+           height: 1em;
+           stroke-width: 3;
+        }
+
+        .btn-approve {
+           background-color: rgba(16, 185, 129, 0.8); /* Emerald-500 with opacity */
+           color: white;
+           border-color: rgba(5, 150, 105, 0.9); /* Darker Emerald */
+        }
+
+        .btn-approve:hover {
+           background-color: #059669; /* Emerald-600 */
+           border-color: #047857; /* Emerald-700 */
+           transform: scale(1.03); /* Slightly smaller scale */
+           color: white;
+           box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+        }
+
+        /* Style for disabled links */
+        .btn-approve.disabled,
+        .btn-approve:disabled {
+           background-color: rgba(85, 85, 85, 0.7);
+           border-color: rgba(68, 68, 68, 0.8);
+           color: #aaa;
+           cursor: not-allowed;
+           opacity: 0.7;
+           pointer-events: none; /* Crucial */
+           box-shadow: none;
+        }
+
+        .btn-reject {
+           background-color: rgba(239, 68, 68, 0.8); /* Red-500 with opacity */
+           color: white;
+           border-color: rgba(220, 38, 38, 0.9); /* Darker Red */
+        }
+
+        .btn-reject:hover {
+           background-color: #dc2626; /* Red-600 */
+           border-color: #b91c1c; /* Red-700 */
+           transform: scale(1.03);
+           color: white;
+           box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+        }
+
+        /* Style for disabled links */
+        .btn-reject.disabled,
+        .btn-reject:disabled {
+           background-color: rgba(85, 85, 85, 0.7);
+           border-color: rgba(68, 68, 68, 0.8);
+           color: #aaa;
+           cursor: not-allowed;
+           opacity: 0.7;
+           pointer-events: none; /* Crucial */
+           box-shadow: none;
+        }
+
+        /* Ensure hover effects are removed when disabled */
+        .violation-actions a.disabled:hover,
+        .violation-actions a:disabled:hover {
+           transform: none;
+           box-shadow: none;
+           background-color: rgba(85, 85, 85, 0.7);
+           border-color: rgba(68, 68, 68, 0.8);
+        }
 
 
-    /* ================================
-       Responsive Media Queries
-    ================================== */
-    @media screen and (min-width: 768px) {
-        .navbar { height: 70px; padding: 0 2.5rem; }
-        .navbar-logo img { height: 40px; }
-        .admin-header h1 { font-size: 2.5em; }
-        .stats-numbers { justify-content: space-around; }
-        .footer-top { flex-direction: row; justify-content: space-between; align-items: flex-start; text-align: left; }
-        .footer-logo { order: 1; } .footer-description { order: 2; text-align: left; margin: 0; } .footer-social { order: 3; align-self: flex-start; }
-        .footer-links-section { grid-template-columns: repeat(4, 1fr); text-align: left; }
-        .footer-links-column { padding: 0; }
-        .footer-bottom { flex-direction: row; justify-content: space-between; text-align: left; }
-        .footer-bottom-links { margin-top: 0; }
-    }
+        /* ================================
+              Main Content & Admin Page Specific Styling
+           ================================== */
+        main {
+           flex: 1;
+           padding: 2rem 1rem 6rem;
+           position: relative;
+           z-index: 10;
+           width: 100%;
+           max-width: 100%;
+           overflow-x: hidden;
+           user-select: auto;
+        }
 
-    @media screen and (min-width: 1024px) {
-        .navbar { padding: 0 4rem; }
-        .navbar-logo img { height: 45px; }
-        .admin-header h1 { font-size: 2.8em; }
-        .violations-grid { grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); }
-    }
+        .admin-container {
+           max-width: 1600px;
+           margin: 0 auto;
+           padding: 0 1.5rem;
+        }
 
-    /* Modal Responsive */
-     @media (max-width: 700px){
+        /* Adjusted padding */
+        .admin-header {
+           text-align: center;
+           margin-bottom: 2rem;
+        }
+
+        .admin-header h1 {
+           font-family: 'Orbitron', sans-serif;
+           font-size: clamp(2em, 4vw + 1em, 2.8em);
+           color: #fff;
+           margin-bottom: 0.5rem;
+           text-shadow: 0 0 12px rgba(168, 85, 247, 0.7);
+        }
+
+        .admin-header p {
+           color: #bbb;
+           font-size: clamp(0.85em, 1.3vw + 0.5em, 0.95em);
+           font-family: 'Roboto Mono', monospace;
+           font-style: normal;
+           opacity: 0.8;
+        }
+
+        /* Filter Section */
+        .filter-section {
+           margin-bottom: 2.5rem;
+           padding: 1.5rem;
+           background: rgba(20, 20, 30, 0.4);
+           border: 1px solid rgba(131, 0, 254, 0.15);
+           border-radius: 10px;
+           text-align: center;
+        }
+
+        .filter-section h3 {
+           margin-bottom: 1rem;
+           font-family: 'Orbitron', sans-serif;
+           color: #e0e0e0;
+           font-size: 1.1em;
+        }
+
+        .filter-buttons {
+           display: flex;
+           flex-wrap: wrap;
+           justify-content: center;
+           gap: 0.5rem 0.8rem;
+        }
+
+        .filter-buttons button {
+           background: rgba(255, 255, 255, 0.08);
+           color: #ccc;
+           border: 1px solid #555;
+           padding: 0.5rem 1rem;
+           border-radius: 6px;
+           cursor: pointer;
+           font-family: 'Roboto Mono', monospace;
+           transition: background-color 0.3s, color 0.3s, border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .filter-buttons button:hover {
+           background: rgba(131, 0, 254, 0.2);
+           color: #fff;
+           border-color: #a855f7;
+        }
+
+        .filter-buttons button.active {
+           background: #8300fe;
+           color: white;
+           border-color: #a855f7;
+           box-shadow: 0 0 10px rgba(131, 0, 254, 0.5);
+        }
+
+        /* Stats Section Styling */
+        .stats-section {
+           background: rgba(20, 20, 30, 0.5);
+           backdrop-filter: blur(8px);
+           -webkit-backdrop-filter: blur(8px);
+           border: 1px solid rgba(131, 0, 254, 0.2);
+           border-radius: 12px;
+           padding: 1.5rem 2rem;
+           margin-bottom: 2.5rem;
+           box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .stats-numbers {
+           display: flex;
+           flex-wrap: wrap;
+           justify-content: center;
+           gap: 1.5rem 2rem;
+        }
+
+        .stat-item {
+           text-align: center;
+           min-width: 120px;
+           flex: 1;
+        }
+
+        .stat-value {
+           display: block;
+           font-family: 'Orbitron', sans-serif;
+           font-size: clamp(1.8em, 4vw, 2.5em);
+           font-weight: bold;
+           color: #e0e0e0;
+           line-height: 1.1;
+           margin-bottom: 0.2rem;
+        }
+
+        .stat-item.pending .stat-value {
+           color: #ffb74d;
+        }
+
+        .stat-item.rejected .stat-value {
+           color: #ef5350;
+        }
+
+        .stat-item.approved .stat-value {
+           color: #4db6ac;
+        }
+
+        .stat-item.total .stat-value {
+           color: #a855f7;
+        }
+
+        .stat-label {
+           display: block;
+           font-family: 'Roboto Mono', monospace;
+           font-size: clamp(0.75em, 1vw + 0.4em, 0.85em);
+           color: #aaa;
+           margin-top: 0.25rem;
+           text-transform: uppercase;
+        }
+
+        /* Violations Grid */
+        .violations-grid {
+           display: grid;
+           grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+           gap: 2rem;
+           margin-bottom: 3rem; /* Space before load more/footer */
+           padding-bottom: 1rem; /* Ensure space below last row */
+        }
+
+        /* Violation Card Styling */
+        .violation-card {
+           background: rgba(25, 25, 35, 0.6);
+           backdrop-filter: blur(5px);
+           -webkit-backdrop-filter: blur(5px);
+           border: 1px solid #444;
+           border-radius: 12px;
+           overflow: hidden;
+           box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+           transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, opacity 0.4s ease; /* Added opacity transition */
+           display: flex;
+           flex-direction: column;
+           position: relative;
+           opacity: 1; /* Start visible */
+        }
+         /* Style for hidden cards during filtering */
+        .violation-card.hidden {
+            opacity: 0;
+            transform: scale(0.95);
+            pointer-events: none; /* Prevent interaction when hidden */
+            /* We don't use display:none so AOS can animate */
+            /* Adjust height/margin if needed for layout stability */
+            height: 0;
+            overflow: hidden;
+            margin-bottom: -2rem; /* Counteract gap */
+            border: none;
+            box-shadow: none;
+        }
+
+
+        .violation-card:hover {
+           transform: translateY(-6px) scale(1.01);
+           box-shadow: 0 8px 25px rgba(131, 0, 254, 0.25);
+           border-color: rgba(131, 0, 254, 0.5);
+        }
+
+        .violation-card img.violation-image {
+           /* Added class */
+           width: 100%;
+           height: 220px;
+           object-fit: cover;
+           display: block;
+           background-color: #222;
+           border-bottom: 1px solid #444;
+           cursor: zoom-in;
+        }
+
+        .violation-details {
+           padding: 1.25rem;
+           flex-grow: 1;
+        }
+
+        .violation-details h4 {
+           font-family: 'Orbitron', sans-serif;
+           font-size: 1.3em;
+           color: #ff8c4d;
+           margin-bottom: 0.75rem;
+        }
+
+        /* Example: Violation Type */
+        .violation-details p {
+           font-family: 'Roboto Mono', monospace;
+           font-size: 0.9em;
+           color: #bbb;
+           margin-bottom: 0.3rem;
+           line-height: 1.5;
+        }
+
+        .violation-details p strong {
+           color: #fff;
+           font-weight: 700;
+        }
+
+        .violation-status {
+           font-weight: bold;
+           padding: 0.1em 0.5em;
+           border-radius: 4px;
+           font-size: 0.85em;
+           display: inline-block;
+           margin-left: 5px; /* Space after "Status:" */
+        }
+
+        .status-pending {
+           color: #ffb74d;
+           background-color: rgba(255, 183, 77, 0.1);
+           border: 1px solid rgba(255, 183, 77, 0.3);
+        }
+
+        .status-approved {
+           color: #4db6ac;
+           background-color: rgba(77, 182, 172, 0.1);
+           border: 1px solid rgba(77, 182, 172, 0.3);
+        }
+
+        .status-rejected {
+           color: #ef5350;
+           background-color: rgba(239, 83, 80, 0.1);
+           border: 1px solid rgba(239, 83, 80, 0.3);
+        }
+
+        .violation-actions {
+           padding: 0.75rem 1.25rem 1.25rem; /* Adjusted padding */
+           display: flex;
+           justify-content: space-between;
+           gap: 1rem;
+           border-top: 1px solid #444;
+           margin-top: 1rem; /* Space above actions */
+        }
+
+
+        /* ================================
+              Image Modal Styling (Restored)
+           ================================== */
+        .modal {
+           display: none;
+           position: fixed;
+           z-index: 2000;
+           padding-top: 50px;
+           left: 0;
+           top: 0;
+           width: 100%;
+           height: 100%;
+           overflow: auto;
+           background-color: rgba(0, 0, 0, 0.85);
+           backdrop-filter: blur(5px);
+           -webkit-backdrop-filter: blur(5px);
+           cursor: zoom-out;
+        }
+
         .modal-content {
-            max-width: 95%;
+           margin: auto;
+           display: block;
+           width: auto;
+           max-width: 90%;
+           max-height: 85vh;
+           animation-name: zoomIn;
+           animation-duration: 0.4s;
+           cursor: default;
+           border-radius: 5px; /* Optional: slight rounding */
         }
+
+        @keyframes zoomIn {
+           from {
+              transform: scale(0.8);
+              opacity: 0;
+           }
+
+           to {
+              transform: scale(1);
+              opacity: 1;
+           }
+        }
+
         .close-modal {
-            font-size: 30px;
-            top: 10px;
-            right: 20px;
+           position: absolute;
+           top: 15px;
+           right: 35px;
+           color: #f1f1f1;
+           font-size: 40px;
+           font-weight: bold;
+           transition: 0.3s;
+           cursor: pointer;
+           line-height: 1;
+           z-index: 2010;
+           text-shadow: 0 1px 3px rgba(0,0,0,0.5);
         }
-     }
+
+        .close-modal:hover,
+        .close-modal:focus {
+           color: #bbb;
+           text-decoration: none;
+           cursor: pointer;
+        }
+
+        /* ================================
+              Footer Styling (Restored)
+           ================================== */
+        footer {
+           font-family: 'Roboto Mono', monospace;
+           background-color: #030305;
+           color: #9ca3af;
+           padding: 3rem 1rem 1.5rem 1rem;
+           position: relative;
+           z-index: 10;
+           font-size: 0.9rem;
+           border-top: 1px solid #333;
+           box-shadow: 0 -4px 20px -5px rgba(131, 0, 254, 0.2);
+           overflow: hidden;
+           margin-top: auto; /* Pushes footer down */
+        }
+
+        footer::before {
+           content: '';
+           position: absolute;
+           inset: 0;
+           z-index: -1;
+           background: linear-gradient(rgba(10, 10, 20, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(10, 10, 20, 0.1) 1px, transparent 1px);
+           background-size: 20px 20px;
+           opacity: 0.3;
+           pointer-events: none;
+        }
+
+        .footer-container {
+           max-width: 1200px;
+           margin: 0 auto;
+        }
+
+        .footer-top {
+           display: flex;
+           flex-direction: column;
+           align-items: center;
+           gap: 1.5rem;
+           margin-bottom: 2rem;
+           padding-bottom: 2rem;
+           border-bottom: 1px solid #333;
+           text-align: center;
+        }
+
+        .footer-logo img {
+           height: 35px;
+        }
+
+        .footer-description {
+           max-width: 450px;
+           color: #9ca3af;
+           font-size: 0.85rem;
+           line-height: 1.7;
+        }
+
+        .footer-social {
+           display: flex;
+           gap: 1.2rem;
+        }
+
+        .footer-social a {
+           cursor: pointer;
+           line-height: 0;
+        }
+
+        .footer-social a svg { /* Using inline SVGs now */
+           width: 20px;
+           height: 20px;
+           fill: #9ca3af;
+           transition: fill 0.3s ease, transform 0.3s ease, filter 0.3s ease;
+           stroke: none; /* Ensure no stroke is applied */
+        }
+
+        .footer-social a:hover svg {
+           fill: #bb86fc; /* Lighter purple */
+           transform: scale(1.15);
+           filter: drop-shadow(0 0 5px rgba(168, 85, 247, 0.5));
+        }
+
+
+        .footer-links-section {
+           display: grid;
+           grid-template-columns: repeat(2, 1fr);
+           gap: 2rem 1.5rem;
+           margin-bottom: 2.5rem;
+           text-align: left;
+        }
+
+        .footer-links-column {
+           padding: 0 0.5rem;
+        }
+
+        .footer-links-column h3 {
+           font-size: 1rem;
+           font-weight: 600;
+           color: #e5e7eb;
+           margin-bottom: 0.8rem;
+           font-family: 'Orbitron', sans-serif;
+        }
+
+        .footer-links-column nav a,
+        .footer-links-column p {
+           display: block;
+           color: #9ca3af;
+           text-decoration: none;
+           margin-bottom: 0.5rem;
+           font-size: 0.85rem;
+           transition: color 0.3s ease, text-decoration 0.3s ease;
+        }
+
+        .footer-links-column nav a:hover {
+           color: #bb86fc;
+           text-decoration: underline;
+           text-decoration-thickness: 1px;
+           text-underline-offset: 3px;
+        }
+
+        .footer-bottom {
+           display: flex;
+           flex-direction: column;
+           justify-content: center;
+           align-items: center;
+           padding-top: 1.5rem;
+           border-top: 1px solid #333;
+           font-size: 0.8rem;
+           color: #888;
+           text-align: center;
+        }
+
+        .footer-bottom-links {
+           display: flex;
+           flex-wrap: wrap;
+           justify-content: center;
+           gap: 1rem 1.5rem;
+           margin-top: 0.8rem;
+        }
+
+        .footer-bottom-links a {
+           color: #888;
+           text-decoration: none;
+           transition: color 0.3s ease;
+        }
+
+        .footer-bottom-links a:hover {
+           color: #bb86fc;
+        }
+
+        /* ================================
+              Responsive Media Queries
+           ================================== */
+        @media screen and (min-width: 768px) {
+           .navbar {
+              height: 70px;
+              padding: 0 2.5rem;
+           }
+
+           .navbar-logo img {
+              height: 40px;
+           }
+
+           .admin-header h1 {
+              font-size: 2.5em;
+           }
+
+           .stats-numbers {
+              justify-content: space-around;
+           }
+
+           .footer-top {
+              flex-direction: row;
+              justify-content: space-between;
+              align-items: flex-start;
+              text-align: left;
+           }
+
+           .footer-logo {
+              order: 1;
+           }
+
+           .footer-description {
+              order: 2;
+              text-align: left;
+              margin: 0;
+           }
+
+           .footer-social {
+              order: 3;
+              align-self: flex-start;
+           }
+
+           .footer-links-section {
+              grid-template-columns: repeat(4, 1fr);
+              text-align: left;
+           }
+
+           .footer-links-column {
+              padding: 0;
+           }
+
+           .footer-bottom {
+              flex-direction: row;
+              justify-content: space-between;
+              text-align: left;
+           }
+
+           .footer-bottom-links {
+              margin-top: 0;
+           }
+            /* Adjust modal close button position */
+           .close-modal {
+                right: 35px;
+           }
+        }
+
+        @media screen and (min-width: 1024px) {
+           .navbar {
+              padding: 0 4rem;
+           }
+
+           .navbar-logo img {
+              height: 45px;
+           }
+
+           .admin-header h1 {
+              font-size: 2.8em;
+           }
+
+           .violations-grid {
+              grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Slightly larger cards */
+           }
+        }
+
+        @media (max-width: 700px) {
+
+           /* Modal Responsive */
+           .modal-content {
+              max-width: 95%;
+           }
+
+           .close-modal {
+              font-size: 30px;
+              top: 10px;
+              right: 20px;
+           }
+        }
