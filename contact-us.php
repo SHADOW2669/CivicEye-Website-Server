@@ -98,7 +98,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <script src="https://cdn.jsdelivr.net/npm/lucide@0.396.0/dist/umd/lucide.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
-   
+
 
 </head>
 
@@ -177,7 +177,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         </div>
                         <div class="details">
                             <h4>Phone</h4>
-                            <p>+91 XXXXX-XXXXX</p> </div>
+                            <p>+91 XXXXX-XXXXX</p>
+                        </div>
                     </div>
                     <div class="info-item">
                         <div class="icon">
@@ -185,7 +186,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         </div>
                         <div class="details">
                             <h4>Email</h4>
-                            <p>info@civiceye.example.com</p> </div>
+                            <p>info@civiceye.example.com</p>
+                        </div>
                     </div>
                     <div class="info-item">
                         <div class="icon">
@@ -202,7 +204,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <div class="contact-form">
                     <h3>Send Us a Message</h3>
 
-                     <?php if (!empty($form_success)): ?>
+                    <?php if (!empty($form_success)): ?>
                         <div class="form-message form-success" role="alert">
                             <?php echo htmlspecialchars($form_success); ?>
                         </div>
@@ -217,24 +219,23 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     <form id="contactForm" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                         <div class="form-group">
                             <label for="contactName">Name</label>
-                            <input type="text" id="contactName" name="name"
-                                placeholder="Your Name" required>
+                            <input type="text" id="contactName" name="name" placeholder="Your Name" required>
                         </div>
                         <div class="form-group">
                             <label for="contactEmail">Email</label>
-                            <input type="email" id="contactEmail" name="email"
-                                placeholder="Your Email" required>
+                            <input type="email" id="contactEmail" name="email" placeholder="Your Email" required>
                         </div>
                         <div class="form-group">
                             <label for="contactMessage">Message</label>
-                            <textarea id="contactMessage" name="message"
-                                placeholder="Type your message here..." required></textarea>
+                            <textarea id="contactMessage" name="message" placeholder="Type your message here..."
+                                required></textarea>
                         </div>
                         <button type="submit" class="submit-btn">
-                            <i data-lucide="send" style="width: 1em; height: 1em; vertical-align: middle; margin-right: 5px;"></i>
+                            <i data-lucide="send"
+                                style="width: 1em; height: 1em; vertical-align: middle; margin-right: 5px;"></i>
                             <span>Send Message</span>
                         </button>
-                         </form>
+                    </form>
                 </div>
             </div>
         </div>
@@ -301,41 +302,41 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             const mobileNavLinks = document.querySelectorAll('.mobile-nav a');
 
             if (menuToggle && closeMenu && mobileNav && overlay) {
-                 const openMenu = () => {
+                const openMenu = () => {
                     mobileNav.classList.add('open');
                     overlay.classList.add('open');
                     document.body.classList.add('no-scroll');
                     menuToggle.setAttribute('aria-expanded', 'true');
-                 };
+                };
 
-                 const closeMenuFunc = () => {
+                const closeMenuFunc = () => {
                     mobileNav.classList.remove('open');
                     overlay.classList.remove('open');
                     document.body.classList.remove('no-scroll');
                     menuToggle.setAttribute('aria-expanded', 'false');
-                 };
+                };
 
-                 menuToggle.addEventListener('click', (e) => {
+                menuToggle.addEventListener('click', (e) => {
                     e.stopPropagation();
                     openMenu();
-                 });
+                });
 
-                 closeMenu.addEventListener('click', closeMenuFunc);
-                 overlay.addEventListener('click', closeMenuFunc);
+                closeMenu.addEventListener('click', closeMenuFunc);
+                overlay.addEventListener('click', closeMenuFunc);
 
-                 mobileNavLinks.forEach(link => {
+                mobileNavLinks.forEach(link => {
                     link.addEventListener('click', closeMenuFunc);
-                 });
+                });
 
-                 document.addEventListener('keydown', (e) => {
+                document.addEventListener('keydown', (e) => {
                     if (e.key === 'Escape' && mobileNav.classList.contains('open')) {
                         closeMenuFunc();
                     }
-                 });
+                });
 
-                 mobileNav.addEventListener('click', (e) => {
+                mobileNav.addEventListener('click', (e) => {
                     e.stopPropagation();
-                 });
+                });
             } else {
                 console.warn("Mobile menu elements not found.");
             }

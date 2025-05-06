@@ -1,701 +1,701 @@
         /* =============================
         Base Reset & Body Styling (Purple Accent Theme)
        ============================= */
-       * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-
-    html {
-        scroll-behavior: smooth;
-        scroll-padding-top: 70px;
-        /* Adjust for fixed navbar */
-        overflow-x: hidden;
-        max-width: 100%;
-    }
-
-    body {
-        font-family: 'IBM Plex Sans', sans-serif;
-        background-color: #0a0a0a;
-        /* Dark background */
-        color: #e0e0e0;
-        line-height: 1.7;
-        overflow-x: hidden;
-        max-width: 100%;
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
-        scrollbar-width: none;
-        /* Firefox */
-        -ms-overflow-style: none;
-        /* IE and Edge */
-        user-select: auto;
-        padding-top: 70px;
-        /* Account for fixed navbar */
-    }
-
-    body::-webkit-scrollbar {
-        display: none;
-    }
-
-    /* Chrome, Safari, Opera */
-
-    /* Background Gradient & Pulse */
-    body::before {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        z-index: -2;
-        /* Behind particles and content */
-        background: radial-gradient(ellipse at 50% 50%, rgba(131, 0, 254, 0.12) 0%, transparent 70%),
-            radial-gradient(ellipse at top left, rgba(56, 189, 248, 0.1) 0%, transparent 65%),
-            radial-gradient(ellipse at bottom right, rgba(131, 0, 254, 0.1) 0%, transparent 65%);
-        animation: backgroundPulse 15s infinite ease-in-out alternate;
-        pointer-events: none;
-        /* Allow clicks through */
-    }
-
-    @keyframes backgroundPulse {
-        0% {
-            opacity: 0.7;
-            transform: scale(1);
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        100% {
-            opacity: 1;
-            transform: scale(1.03);
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 70px;
+            /* Adjust for fixed navbar */
+            overflow-x: hidden;
+            max-width: 100%;
         }
-    }
 
-    /* Class to prevent scrolling when nav is open */
-    body.modal-open {
-        /* Reusing class name for consistency */
-        overflow: hidden;
-    }
+        body {
+            font-family: 'IBM Plex Sans', sans-serif;
+            background-color: #0a0a0a;
+            /* Dark background */
+            color: #e0e0e0;
+            line-height: 1.7;
+            overflow-x: hidden;
+            max-width: 100%;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            scrollbar-width: none;
+            /* Firefox */
+            -ms-overflow-style: none;
+            /* IE and Edge */
+            user-select: auto;
+            padding-top: 70px;
+            /* Account for fixed navbar */
+        }
 
-    /* =============================
+        body::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Chrome, Safari, Opera */
+
+        /* Background Gradient & Pulse */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -2;
+            /* Behind particles and content */
+            background: radial-gradient(ellipse at 50% 50%, rgba(131, 0, 254, 0.12) 0%, transparent 70%),
+                radial-gradient(ellipse at top left, rgba(56, 189, 248, 0.1) 0%, transparent 65%),
+                radial-gradient(ellipse at bottom right, rgba(131, 0, 254, 0.1) 0%, transparent 65%);
+            animation: backgroundPulse 15s infinite ease-in-out alternate;
+            pointer-events: none;
+            /* Allow clicks through */
+        }
+
+        @keyframes backgroundPulse {
+            0% {
+                opacity: 0.7;
+                transform: scale(1);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1.03);
+            }
+        }
+
+        /* Class to prevent scrolling when nav is open */
+        body.modal-open {
+            /* Reusing class name for consistency */
+            overflow: hidden;
+        }
+
+        /* =============================
     Particles Background (Purple/Blue Theme)
    ============================= */
-    #particles-js {
-        position: fixed;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        z-index: -1;
-        /* Behind content */
-        background-color: transparent;
-        pointer-events: none;
-    }
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            /* Behind content */
+            background-color: transparent;
+            pointer-events: none;
+        }
 
-    /* =============================
+        /* =============================
    Navbar Styling (Purple Accent Theme)
    ============================= */
-    .navbar {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 70px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0 1rem;
-        background: rgba(10, 10, 15, 0.75);
-        backdrop-filter: blur(18px);
-        -webkit-backdrop-filter: blur(18px);
-        z-index: 1000;
-        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.5), 0 0 25px rgba(131, 0, 254, 0.2);
-        border-bottom: 1px solid rgba(131, 0, 254, 0.25);
-        transition: height 0.3s ease-in-out;
-    }
-
-    .navbar-logo img {
-        height: 35px;
-        transition: transform 0.3s ease;
-        display: block;
-    }
-
-    .navbar-logo img:hover {
-        transform: scale(1.1);
-    }
-
-    /* Desktop Navigation Links (ALWAYS HIDDEN in provided CSS) */
-    .navbar-links {
-        display: none;
-    }
-
-    /* Hamburger Menu Button (Always Visible) */
-    .hamburger-menu {
-        display: block;
-        background: none;
-        border: none;
-        cursor: pointer;
-        z-index: 1050;
-        padding: 0.5rem;
-        line-height: 0;
-    }
-
-    /* Hamburger Icon Styling (White Fill) */
-    .hamburger-menu svg {
-        width: 28px;
-        height: 28px;
-        fill: #ffffff;
-        transition: fill 0.3s ease;
-    }
-
-    /* Purple hover for hamburger */
-    .hamburger-menu:hover svg {
-        fill: #a855f7;
-    }
-
-    /* Mobile Navigation Menu (Purple Accent Theme) */
-    .mobile-nav-menu {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 80%;
-        max-width: 300px;
-        height: 100vh;
-        background: rgba(10, 10, 20, 0.8);
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
-        z-index: 1100;
-        transform: translateX(-100%);
-        opacity: 0;
-        visibility: hidden;
-        transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s ease-in-out, visibility 0s linear 0.4s;
-        display: flex;
-        flex-direction: column;
-        padding: 6rem 2rem 2rem;
-        border-right: 1px solid rgba(131, 0, 254, 0.2);
-        box-shadow: 5px 0 25px rgba(131, 0, 254, 0.1);
-        overflow-y: auto;
-        /* Allow scrolling if content exceeds height */
-    }
-
-    /* Active state for mobile menu */
-    .mobile-nav-menu.active {
-        transform: translateX(0);
-        opacity: 1;
-        visibility: visible;
-        transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s ease-in-out, visibility 0s linear 0s;
-    }
-
-    /* Style regular links in mobile menu (No Icons, No Borders) */
-    .mobile-nav-menu a:not(.logout-btn-link) {
-        color: #e5e7eb;
-        text-decoration: none;
-        font-family: 'Roboto Mono', monospace;
-        font-size: 1.1rem;
-        padding: 1rem 0;
-        border-bottom: none;
-        transition: color 0.3s ease, padding-left 0.3s ease;
-        text-align: left;
-        display: block;
-    }
-
-    .mobile-nav-menu a:not(.logout-btn-link):hover {
-        color: #c084fc;
-        padding-left: 0.5rem;
-    }
-
-    /* Purple hover */
-
-    /* Style button link wrapper in mobile menu */
-    .mobile-nav-menu .logout-btn-link {
-        margin-top: auto;
-        text-align: center;
-        border-bottom: none;
-        padding: 1rem 0 0 0;
-        display: block;
-        border-top: none;
-        text-decoration: none;
-        /* Ensure link itself isn't underlined */
-    }
-
-    .mobile-nav-menu .logout-btn-link:hover {
-        padding-left: 0;
-        background-color: transparent;
-        text-shadow: none;
-    }
-
-    /* Style button itself in mobile menu */
-    .mobile-nav-menu .logout-btn {
-        width: 100%;
-        padding: 0.8rem 1rem;
-        font-size: 1rem;
-    }
-
-    /* Close Button for Mobile Menu */
-    .close-menu-btn {
-        position: absolute;
-        top: 1.5rem;
-        right: 1.5rem;
-        background: none;
-        border: none;
-        cursor: pointer;
-        padding: 0.25rem;
-        line-height: 0;
-    }
-
-    .close-menu-btn i.lucide {
-        width: 30px;
-        height: 30px;
-        color: #9ca3af;
-        stroke-width: 2;
-        transition: color 0.3s ease, transform 0.3s ease;
-    }
-
-    .close-menu-btn:hover i.lucide {
-        color: #fff;
-        transform: rotate(90deg);
-    }
-
-
-    /* ================================
-   Button Styling (Purple Accent Theme) - Keep for Logout Button
-================================== */
-    .btn-base {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.6rem;
-        padding: 0.7rem 1.4rem;
-        border-radius: 8px;
-        cursor: pointer;
-        font-size: clamp(0.85rem, 1.5vw + 0.5rem, 0.95rem);
-        font-weight: bold;
-        font-family: 'Orbitron', sans-serif;
-        transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        text-align: center;
-        text-decoration: none;
-        position: relative;
-        overflow: hidden;
-        border: 2px solid transparent;
-        pointer-events: auto;
-        user-select: none;
-    }
-
-    .btn-base span,
-    .btn-base i.lucide {
-        position: relative;
-        z-index: 2;
-        height: 1.1em;
-        width: auto;
-        stroke-width: 2.5;
-        pointer-events: none;
-    }
-
-    .btn-base i.lucide {
-        width: 1.1em;
-    }
-
-    /* Shiny hover effect */
-    .btn-base::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -120%;
-        width: 60%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
-        transform: skewX(-25deg);
-        transition: left 0.7s ease;
-        z-index: 1;
-        pointer-events: none;
-    }
-
-    .btn-base:hover::before {
-        left: 120%;
-    }
-
-    /* Active (pressed) state */
-    .btn-base:active {
-        transform: scale(0.97);
-        transition-duration: 0.1s;
-        filter: brightness(0.9);
-    }
-
-    /* Nav Action Button Style (Purple Outline - Used for Logout) */
-    .btn-nav-action {
-        background: transparent;
-        color: #c084fc;
-        border: 2px solid #8300fe;
-        box-shadow: 0 0 8px rgba(131, 0, 254, 0.3);
-        animation: none;
-    }
-
-    .btn-nav-action:hover {
-        background: #8300fe;
-        color: #ffffff;
-        border-color: #8300fe;
-        box-shadow: 0 0 15px rgba(131, 0, 254, 0.6);
-        transform: scale(1.03);
-    }
-
-    .btn-nav-action:active {
-        background: #6a00d3;
-        border-color: #6a00d3;
-        transform: scale(0.98);
-        filter: brightness(0.9);
-    }
-
-    .btn-nav-action::before {
-        display: none;
-    }
-
-    /* ================================
-   Main Content Styling
-================================== */
-    main {
-        flex: 1;
-        padding-bottom: 6rem;
-        position: relative;
-        z-index: 10;
-        width: 100%;
-        max-width: 100%;
-        overflow-x: hidden;
-        user-select: auto;
-    }
-
-    /* ================================
-   Admin Page Specific Styling
-================================== */
-    .admin-container {
-        max-width: 1600px;
-        margin: 0 auto;
-        padding: 2rem 1.5rem;
-    }
-
-    /* Header for this page */
-    .admin-header {
-        text-align: center;
-        margin-bottom: 2.5rem;
-        /* Increased margin */
-    }
-
-    .admin-header h1 {
-        font-family: 'Orbitron', sans-serif;
-        font-size: clamp(2em, 4vw + 1em, 2.8em);
-        color: #fff;
-        margin-bottom: 0.5rem;
-        text-shadow: 0 0 12px rgba(168, 85, 247, 0.7);
-    }
-
-    .admin-header p {
-        color: #bbb;
-        font-size: clamp(0.85em, 1.3vw + 0.5em, 0.95em);
-        font-family: 'Roboto Mono', monospace;
-        font-style: normal;
-        opacity: 0.8;
-    }
-
-
-    /* ================================
-   Contact Messages Section Styling
-================================== */
-    .contact-messages-section {
-        background: rgba(20, 20, 30, 0.5);
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-        border: 1px solid rgba(131, 0, 254, 0.2);
-        border-radius: 12px;
-        padding: 1.5rem 2rem;
-        margin-bottom: 2.5rem;
-        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
-    }
-
-    /* Title within the section is removed, using page header instead */
-    .messages-table-container {
-        overflow-x: auto;
-        /* Enable horizontal scroll on small screens */
-        -webkit-overflow-scrolling: touch;
-        /* Smooth scrolling on iOS */
-    }
-
-    .messages-table {
-        width: 100%;
-        border-collapse: collapse;
-        font-family: 'Roboto Mono', monospace;
-        font-size: 0.9em;
-        min-width: 600px;
-        /* Prevent excessive squishing on small screens */
-    }
-
-    .messages-table th,
-    .messages-table td {
-        padding: 0.8rem 1rem;
-        text-align: left;
-        border-bottom: 1px solid #444;
-        vertical-align: top;
-        /* Align content to top */
-    }
-
-    .messages-table th {
-        background-color: rgba(131, 0, 254, 0.15);
-        color: #e0e0e0;
-        font-weight: bold;
-        text-transform: uppercase;
-        font-size: 0.8em;
-        letter-spacing: 0.5px;
-    }
-
-    .messages-table tbody tr:hover {
-        background-color: rgba(255, 255, 255, 0.04);
-    }
-
-    .messages-table td {
-        color: #bbb;
-        line-height: 1.6;
-    }
-
-    .messages-table td:nth-child(1),
-    /* Name */
-    .messages-table td:nth-child(2) {
-        /* Email */
-        white-space: nowrap;
-        /* Prevent name/email wrapping */
-        color: #ddd;
-    }
-
-    .messages-table td:nth-child(3) {
-        /* Message */
-        white-space: normal;
-        /* Allow message to wrap */
-        min-width: 200px;
-        /* Give message column more space */
-    }
-
-    .messages-table td:nth-child(4) {
-        /* Date */
-        white-space: nowrap;
-        font-size: 0.85em;
-        color: #999;
-    }
-
-    /* ================================
-   Footer Styling
-================================== */
-    footer {
-        font-family: 'Roboto Mono', monospace;
-        background-color: #030305;
-        color: #9ca3af;
-        padding: 3rem 1rem 1.5rem 1rem;
-        position: relative;
-        z-index: 10;
-        font-size: 0.9rem;
-        border-top: 1px solid #333;
-        box-shadow: 0 -4px 20px -5px rgba(131, 0, 254, 0.2);
-        overflow: hidden;
-        margin-top: auto;
-        /* Push footer to bottom */
-    }
-
-    footer::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        z-index: -1;
-        background: linear-gradient(rgba(10, 10, 20, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(10, 10, 20, 0.1) 1px, transparent 1px);
-        background-size: 20px 20px;
-        opacity: 0.3;
-        pointer-events: none;
-    }
-
-    .footer-container {
-        max-width: 1200px;
-        margin: 0 auto;
-    }
-
-    .footer-top {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 1.5rem;
-        margin-bottom: 2rem;
-        padding-bottom: 2rem;
-        border-bottom: 1px solid #333;
-        text-align: center;
-    }
-
-    .footer-logo img {
-        height: 35px;
-    }
-
-    .footer-description {
-        max-width: 450px;
-        color: #9ca3af;
-        font-size: 0.85rem;
-        line-height: 1.7;
-    }
-
-    .footer-social {
-        display: flex;
-        gap: 1.2rem;
-    }
-
-    .footer-social a {
-        cursor: pointer;
-        line-height: 0;
-    }
-
-    /* Using inline SVGs for social icons */
-    .footer-social a svg {
-        width: 20px;
-        height: 20px;
-        fill: #9ca3af;
-        transition: fill 0.3s ease, transform 0.3s ease, filter 0.3s ease;
-    }
-
-    .footer-social a:hover svg {
-        fill: #bb86fc;
-        transform: scale(1.15);
-        filter: drop-shadow(0 0 5px rgba(168, 85, 247, 0.5));
-    }
-
-    .footer-links-section {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 2rem 1.5rem;
-        margin-bottom: 2.5rem;
-        text-align: left;
-    }
-
-    .footer-links-column {
-        padding: 0 0.5rem;
-    }
-
-    .footer-links-column h3 {
-        font-size: 1rem;
-        font-weight: 600;
-        color: #e5e7eb;
-        margin-bottom: 0.8rem;
-        font-family: 'Orbitron', sans-serif;
-    }
-
-    .footer-links-column nav a,
-    .footer-links-column p {
-        display: block;
-        color: #9ca3af;
-        text-decoration: none;
-        margin-bottom: 0.5rem;
-        font-size: 0.85rem;
-        transition: color 0.3s ease, text-decoration 0.3s ease;
-    }
-
-    .footer-links-column nav a:hover {
-        color: #bb86fc;
-        text-decoration: underline;
-        text-decoration-thickness: 1px;
-        text-underline-offset: 3px;
-    }
-
-    .footer-bottom {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding-top: 1.5rem;
-        border-top: 1px solid #333;
-        font-size: 0.8rem;
-        color: #888;
-        text-align: center;
-    }
-
-    .footer-bottom-links {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 1rem 1.5rem;
-        margin-top: 0.8rem;
-    }
-
-    .footer-bottom-links a {
-        color: #888;
-        text-decoration: none;
-        transition: color 0.3s ease;
-    }
-
-    .footer-bottom-links a:hover {
-        color: #bb86fc;
-    }
-
-
-    /* ================================
-   Responsive Media Queries
-================================== */
-    @media screen and (min-width: 768px) {
         .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
             height: 70px;
-            padding: 0 2.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1rem;
+            background: rgba(10, 10, 15, 0.75);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            z-index: 1000;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.5), 0 0 25px rgba(131, 0, 254, 0.2);
+            border-bottom: 1px solid rgba(131, 0, 254, 0.25);
+            transition: height 0.3s ease-in-out;
         }
 
         .navbar-logo img {
-            height: 40px;
+            height: 35px;
+            transition: transform 0.3s ease;
+            display: block;
+        }
+
+        .navbar-logo img:hover {
+            transform: scale(1.1);
+        }
+
+        /* Desktop Navigation Links (ALWAYS HIDDEN in provided CSS) */
+        .navbar-links {
+            display: none;
+        }
+
+        /* Hamburger Menu Button (Always Visible) */
+        .hamburger-menu {
+            display: block;
+            background: none;
+            border: none;
+            cursor: pointer;
+            z-index: 1050;
+            padding: 0.5rem;
+            line-height: 0;
+        }
+
+        /* Hamburger Icon Styling (White Fill) */
+        .hamburger-menu svg {
+            width: 28px;
+            height: 28px;
+            fill: #ffffff;
+            transition: fill 0.3s ease;
+        }
+
+        /* Purple hover for hamburger */
+        .hamburger-menu:hover svg {
+            fill: #a855f7;
+        }
+
+        /* Mobile Navigation Menu (Purple Accent Theme) */
+        .mobile-nav-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 80%;
+            max-width: 300px;
+            height: 100vh;
+            background: rgba(10, 10, 20, 0.8);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            z-index: 1100;
+            transform: translateX(-100%);
+            opacity: 0;
+            visibility: hidden;
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s ease-in-out, visibility 0s linear 0.4s;
+            display: flex;
+            flex-direction: column;
+            padding: 6rem 2rem 2rem;
+            border-right: 1px solid rgba(131, 0, 254, 0.2);
+            box-shadow: 5px 0 25px rgba(131, 0, 254, 0.1);
+            overflow-y: auto;
+            /* Allow scrolling if content exceeds height */
+        }
+
+        /* Active state for mobile menu */
+        .mobile-nav-menu.active {
+            transform: translateX(0);
+            opacity: 1;
+            visibility: visible;
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s ease-in-out, visibility 0s linear 0s;
+        }
+
+        /* Style regular links in mobile menu (No Icons, No Borders) */
+        .mobile-nav-menu a:not(.logout-btn-link) {
+            color: #e5e7eb;
+            text-decoration: none;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 1.1rem;
+            padding: 1rem 0;
+            border-bottom: none;
+            transition: color 0.3s ease, padding-left 0.3s ease;
+            text-align: left;
+            display: block;
+        }
+
+        .mobile-nav-menu a:not(.logout-btn-link):hover {
+            color: #c084fc;
+            padding-left: 0.5rem;
+        }
+
+        /* Purple hover */
+
+        /* Style button link wrapper in mobile menu */
+        .mobile-nav-menu .logout-btn-link {
+            margin-top: auto;
+            text-align: center;
+            border-bottom: none;
+            padding: 1rem 0 0 0;
+            display: block;
+            border-top: none;
+            text-decoration: none;
+            /* Ensure link itself isn't underlined */
+        }
+
+        .mobile-nav-menu .logout-btn-link:hover {
+            padding-left: 0;
+            background-color: transparent;
+            text-shadow: none;
+        }
+
+        /* Style button itself in mobile menu */
+        .mobile-nav-menu .logout-btn {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            font-size: 1rem;
+        }
+
+        /* Close Button for Mobile Menu */
+        .close-menu-btn {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.25rem;
+            line-height: 0;
+        }
+
+        .close-menu-btn i.lucide {
+            width: 30px;
+            height: 30px;
+            color: #9ca3af;
+            stroke-width: 2;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .close-menu-btn:hover i.lucide {
+            color: #fff;
+            transform: rotate(90deg);
+        }
+
+
+        /* ================================
+   Button Styling (Purple Accent Theme) - Keep for Logout Button
+================================== */
+        .btn-base {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            padding: 0.7rem 1.4rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: clamp(0.85rem, 1.5vw + 0.5rem, 0.95rem);
+            font-weight: bold;
+            font-family: 'Orbitron', sans-serif;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            text-align: center;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+            pointer-events: auto;
+            user-select: none;
+        }
+
+        .btn-base span,
+        .btn-base i.lucide {
+            position: relative;
+            z-index: 2;
+            height: 1.1em;
+            width: auto;
+            stroke-width: 2.5;
+            pointer-events: none;
+        }
+
+        .btn-base i.lucide {
+            width: 1.1em;
+        }
+
+        /* Shiny hover effect */
+        .btn-base::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -120%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+            transform: skewX(-25deg);
+            transition: left 0.7s ease;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .btn-base:hover::before {
+            left: 120%;
+        }
+
+        /* Active (pressed) state */
+        .btn-base:active {
+            transform: scale(0.97);
+            transition-duration: 0.1s;
+            filter: brightness(0.9);
+        }
+
+        /* Nav Action Button Style (Purple Outline - Used for Logout) */
+        .btn-nav-action {
+            background: transparent;
+            color: #c084fc;
+            border: 2px solid #8300fe;
+            box-shadow: 0 0 8px rgba(131, 0, 254, 0.3);
+            animation: none;
+        }
+
+        .btn-nav-action:hover {
+            background: #8300fe;
+            color: #ffffff;
+            border-color: #8300fe;
+            box-shadow: 0 0 15px rgba(131, 0, 254, 0.6);
+            transform: scale(1.03);
+        }
+
+        .btn-nav-action:active {
+            background: #6a00d3;
+            border-color: #6a00d3;
+            transform: scale(0.98);
+            filter: brightness(0.9);
+        }
+
+        .btn-nav-action::before {
+            display: none;
+        }
+
+        /* ================================
+   Main Content Styling
+================================== */
+        main {
+            flex: 1;
+            padding-bottom: 6rem;
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 100%;
+            overflow-x: hidden;
+            user-select: auto;
+        }
+
+        /* ================================
+   Admin Page Specific Styling
+================================== */
+        .admin-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        /* Header for this page */
+        .admin-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            /* Increased margin */
         }
 
         .admin-header h1 {
-            font-size: 2.5em;
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2em, 4vw + 1em, 2.8em);
+            color: #fff;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 12px rgba(168, 85, 247, 0.7);
+        }
+
+        .admin-header p {
+            color: #bbb;
+            font-size: clamp(0.85em, 1.3vw + 0.5em, 0.95em);
+            font-family: 'Roboto Mono', monospace;
+            font-style: normal;
+            opacity: 0.8;
+        }
+
+
+        /* ================================
+   Contact Messages Section Styling
+================================== */
+        .contact-messages-section {
+            background: rgba(20, 20, 30, 0.5);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(131, 0, 254, 0.2);
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Title within the section is removed, using page header instead */
+        .messages-table-container {
+            overflow-x: auto;
+            /* Enable horizontal scroll on small screens */
+            -webkit-overflow-scrolling: touch;
+            /* Smooth scrolling on iOS */
+        }
+
+        .messages-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.9em;
+            min-width: 600px;
+            /* Prevent excessive squishing on small screens */
+        }
+
+        .messages-table th,
+        .messages-table td {
+            padding: 0.8rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid #444;
+            vertical-align: top;
+            /* Align content to top */
+        }
+
+        .messages-table th {
+            background-color: rgba(131, 0, 254, 0.15);
+            color: #e0e0e0;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.8em;
+            letter-spacing: 0.5px;
+        }
+
+        .messages-table tbody tr:hover {
+            background-color: rgba(255, 255, 255, 0.04);
+        }
+
+        .messages-table td {
+            color: #bbb;
+            line-height: 1.6;
+        }
+
+        .messages-table td:nth-child(1),
+        /* Name */
+        .messages-table td:nth-child(2) {
+            /* Email */
+            white-space: nowrap;
+            /* Prevent name/email wrapping */
+            color: #ddd;
+        }
+
+        .messages-table td:nth-child(3) {
+            /* Message */
+            white-space: normal;
+            /* Allow message to wrap */
+            min-width: 200px;
+            /* Give message column more space */
+        }
+
+        .messages-table td:nth-child(4) {
+            /* Date */
+            white-space: nowrap;
+            font-size: 0.85em;
+            color: #999;
+        }
+
+        /* ================================
+   Footer Styling
+================================== */
+        footer {
+            font-family: 'Roboto Mono', monospace;
+            background-color: #030305;
+            color: #9ca3af;
+            padding: 3rem 1rem 1.5rem 1rem;
+            position: relative;
+            z-index: 10;
+            font-size: 0.9rem;
+            border-top: 1px solid #333;
+            box-shadow: 0 -4px 20px -5px rgba(131, 0, 254, 0.2);
+            overflow: hidden;
+            margin-top: auto;
+            /* Push footer to bottom */
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            background: linear-gradient(rgba(10, 10, 20, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(10, 10, 20, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .footer-top {
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: flex-start;
-            text-align: left;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #333;
+            text-align: center;
         }
 
-        .footer-logo {
-            order: 1;
+        .footer-logo img {
+            height: 35px;
         }
 
         .footer-description {
-            order: 2;
-            text-align: left;
-            margin: 0;
+            max-width: 450px;
+            color: #9ca3af;
+            font-size: 0.85rem;
+            line-height: 1.7;
         }
 
         .footer-social {
-            order: 3;
-            align-self: flex-start;
+            display: flex;
+            gap: 1.2rem;
+        }
+
+        .footer-social a {
+            cursor: pointer;
+            line-height: 0;
+        }
+
+        /* Using inline SVGs for social icons */
+        .footer-social a svg {
+            width: 20px;
+            height: 20px;
+            fill: #9ca3af;
+            transition: fill 0.3s ease, transform 0.3s ease, filter 0.3s ease;
+        }
+
+        .footer-social a:hover svg {
+            fill: #bb86fc;
+            transform: scale(1.15);
+            filter: drop-shadow(0 0 5px rgba(168, 85, 247, 0.5));
         }
 
         .footer-links-section {
-            grid-template-columns: repeat(4, 1fr);
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem 1.5rem;
+            margin-bottom: 2.5rem;
             text-align: left;
         }
 
         .footer-links-column {
-            padding: 0;
+            padding: 0 0.5rem;
+        }
+
+        .footer-links-column h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #e5e7eb;
+            margin-bottom: 0.8rem;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .footer-links-column nav a,
+        .footer-links-column p {
+            display: block;
+            color: #9ca3af;
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+            font-size: 0.85rem;
+            transition: color 0.3s ease, text-decoration 0.3s ease;
+        }
+
+        .footer-links-column nav a:hover {
+            color: #bb86fc;
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 3px;
         }
 
         .footer-bottom {
-            flex-direction: row;
-            justify-content: space-between;
-            text-align: left;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid #333;
+            font-size: 0.8rem;
+            color: #888;
+            text-align: center;
         }
 
         .footer-bottom-links {
-            margin-top: 0;
-        }
-    }
-
-    @media screen and (min-width: 1024px) {
-        .navbar {
-            padding: 0 4rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem 1.5rem;
+            margin-top: 0.8rem;
         }
 
-        .navbar-logo img {
-            height: 45px;
+        .footer-bottom-links a {
+            color: #888;
+            text-decoration: none;
+            transition: color 0.3s ease;
         }
 
-        .admin-header h1 {
-            font-size: 2.8em;
+        .footer-bottom-links a:hover {
+            color: #bb86fc;
         }
-    }
+
+
+        /* ================================
+   Responsive Media Queries
+================================== */
+        @media screen and (min-width: 768px) {
+            .navbar {
+                height: 70px;
+                padding: 0 2.5rem;
+            }
+
+            .navbar-logo img {
+                height: 40px;
+            }
+
+            .admin-header h1 {
+                font-size: 2.5em;
+            }
+
+            .footer-top {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: flex-start;
+                text-align: left;
+            }
+
+            .footer-logo {
+                order: 1;
+            }
+
+            .footer-description {
+                order: 2;
+                text-align: left;
+                margin: 0;
+            }
+
+            .footer-social {
+                order: 3;
+                align-self: flex-start;
+            }
+
+            .footer-links-section {
+                grid-template-columns: repeat(4, 1fr);
+                text-align: left;
+            }
+
+            .footer-links-column {
+                padding: 0;
+            }
+
+            .footer-bottom {
+                flex-direction: row;
+                justify-content: space-between;
+                text-align: left;
+            }
+
+            .footer-bottom-links {
+                margin-top: 0;
+            }
+        }
+
+        @media screen and (min-width: 1024px) {
+            .navbar {
+                padding: 0 4rem;
+            }
+
+            .navbar-logo img {
+                height: 45px;
+            }
+
+            .admin-header h1 {
+                font-size: 2.8em;
+            }
+        }

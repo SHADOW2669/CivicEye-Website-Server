@@ -483,55 +483,63 @@ main {
     filter: brightness(0.9);
     transition-duration: 0.1s;
 }
-        /* Basic styling for success/error messages */
-        .form-message {
-            padding: 15px;
-            margin-bottom: 20px;
-            border-radius: 5px;
-            font-size: 0.95em;
-            border: 1px solid transparent;
-        }
-        .form-success {
-            color: #155724;
-            background-color: #d4edda;
-            border-color: #c3e6cb;
-        }
-        .form-error {
-            color: #721c24;
-            background-color: #f8d7da;
-            border-color: #f5c6cb;
-        }
-        .form-error strong {
-            font-weight: bold;
-        }
-        /* Ensure form elements have consistent styling */
-        .contact-form input[type="text"],
-        .contact-form input[type="email"],
-        .contact-form textarea {
-            /* Add styles consistent with contact-us.css if needed */
-            /* Example: */
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc; /* Adjust color as needed */
-            border-radius: 4px;
-        }
-        .contact-form button.submit-btn {
-             /* Add styles consistent with contact-us.css */
-             /* Example: */
-             cursor: pointer;
-             padding: 12px 20px;
-             border: none;
-             border-radius: 4px;
-             /* Add background, color, etc. */
-        }
-        .contact-form label {
-            /* Add styles consistent with contact-us.css */
-            /* Example: */
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
+
+/* Basic styling for success/error messages */
+.form-message {
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    font-size: 0.95em;
+    border: 1px solid transparent;
+}
+
+.form-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+
+.form-error {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+
+.form-error strong {
+    font-weight: bold;
+}
+
+/* Ensure form elements have consistent styling */
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea {
+    /* Add styles consistent with contact-us.css if needed */
+    /* Example: */
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    /* Adjust color as needed */
+    border-radius: 4px;
+}
+
+.contact-form button.submit-btn {
+    /* Add styles consistent with contact-us.css */
+    /* Example: */
+    cursor: pointer;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    /* Add background, color, etc. */
+}
+
+.contact-form label {
+    /* Add styles consistent with contact-us.css */
+    /* Example: */
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
 
 
 
